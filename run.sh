@@ -1,1 +1,1 @@
-docker run --dns $DOCKER_HOST_IP --network=host knowledge_client_cypress:latest npm run cy:run
+docker run --dns $DOCKER_HOST_IP --network=host guide_events_sunshine_api_tests:latest npm run cy:run
