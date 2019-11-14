@@ -15,9 +15,9 @@ describe("Guide event", () => {
         let now = new Date().toISOString();
         cy
             .get('.article-vote-up').click()
-            .getUserEvents(this.user, now)
+            .getUserEvents(this.user, now,'article_vote_added')
             .then(responseData =>
-                expect(responseData[0]).to.have.property('type', 'article_vote_added'))
+                expect(responseData).to.be.true)
     });
 
 });

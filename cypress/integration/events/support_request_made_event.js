@@ -18,9 +18,9 @@ describe("Guide event", () => {
     it("SupportRequestMade event present in the sunshine", function () {
         cy
             .wait(10000)
-            .getUserEvents(this.user, now)
+            .getUserEvents(this.user, now,'support_request_made')
             .then(responseData =>
-                expect(responseData[0]).to.have.property('type', 'support_request_made'))
+                expect(responseData).to.be.true)
     });
 
 });

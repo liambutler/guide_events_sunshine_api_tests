@@ -90,20 +90,26 @@ Cypress.Commands.add("getUser", userRole =>
         .then(res => res.body.users.find(user => user.role === userRole))
 );
 
-Cypress.Commands.add("getUserEvents", (user, time) => {
-        return cy
+Cypress.Commands.add("getUserEvents", (user, time, event2) => {
+         return cy
             .waitUntil(() =>
                     cy.requestApi({
                         method: "GET",
                         url: `/api/sunshine/events?identifier=support:user_id:${JSON.stringify(user.id)}&start_time=${time}`
                     })
                         .then(response => {
-                            if (response.body.data === null) {
+                            if (response.body.data != null) {
+                                for (let i = 0; i < response.body.data.length; i++) {
+                                    if (response.body.data[i].type === event2) {
+                                        return true
+                                    }
+                                }
                                 return false
-                            } else {
-                                return response.body.data
+                            }else {
+                                return false
                             }
-                        })
+                        }
+                            )
                 , {interval: 3000, timeout: 30000})
     }
 );

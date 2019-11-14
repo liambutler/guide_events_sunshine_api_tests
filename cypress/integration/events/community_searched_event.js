@@ -19,9 +19,9 @@ describe("Guide event", () => {
     it("CommunitySearched event present in the sunshine", function () {
         cy
             .wait(16000)
-            .getUserEvents(this.user, now)
+            .getUserEvents(this.user, now,'community_searched')
             .then(responseData =>
-                expect(responseData[0]).to.have.property('type', 'community_searched'))
+                expect(responseData).to.be.true)
     });
 
 });

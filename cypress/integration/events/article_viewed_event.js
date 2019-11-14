@@ -17,8 +17,8 @@ describe("Guide event", () => {
     });
     it("ArticleViewed event present in the sunshine", function () {
         cy
-            .getUserEvents(this.user, now)
+            .getUserEvents(this.user, now,'article_viewed')
             .then(responseData =>
-                expect(responseData[0]).to.have.property('type', 'article_viewed'))
+                expect(responseData).to.be.true)
     });
 });

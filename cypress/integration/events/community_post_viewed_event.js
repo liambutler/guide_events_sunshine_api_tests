@@ -13,9 +13,9 @@ describe("Guide event", () => {
     });
     it("ArticleSearchResultClicked event present in the sunshine", function () {
         cy
-            .getUserEvents(this.user, now)
+            .getUserEvents(this.user, now,'community_post_viewed')
             .then(responseData =>
-                expect(responseData[0]).to.have.property('type', 'community_post_viewed'))
+                expect(responseData).to.be.true)
     });
 
 });

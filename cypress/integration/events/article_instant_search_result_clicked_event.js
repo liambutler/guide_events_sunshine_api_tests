@@ -15,13 +15,15 @@ describe("Guide event", () => {
             .then(article =>
                 cy
                     .get('#query').type(article.title)
+
                     .get('zd-autocomplete-multibrand').click());
     });
     it("ArticleInstantSearchResultClicked event present in the sunshine", function () {
         cy
-            .getUserEvents(this.user, now)
+            .getUserEvents(this.user, now,'article_instant_search_result_clicked')
             .then(responseData =>
-                expect(responseData[0]).to.have.property('type', 'article_instant_search_result_clicked'))
+                expect(responseData).to.be.true)
+                //expect(responseData.body.data[0]).to.have.property('type', 'article_instant_search_result_clicked'))
     });
 
 });
