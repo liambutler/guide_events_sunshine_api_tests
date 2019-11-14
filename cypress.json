@@ -1,0 +1,10 @@
+{
+  "projectId": "guide_events_in_sunshine_api",
+  "videoUploadOnPasses": false,
+  "defaultCommandTimeout": 10000,
+  "viewportHeight": 1200,
+  "viewportWidth": 1300,
+  "baseUrl": "https://z3nab-ngrybeniuk-1568893515-4d7eacebe4.zendesk-staging.com/",
+  "video": true,
+  "chromeWebSecurity": false
+}

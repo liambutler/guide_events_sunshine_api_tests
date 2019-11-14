@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "integration-test",
+  "description": "Cypress based test suite for guide events in sunshine API",
+  "author": "Nikolay Gribeniuk",
+  "license": "UNLICENSED",
+  "repository": "git@github.com:zendesk/guide-client.git",
+  "version": "1.0.0",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "998": "CYPRESS_baseUrl='https://zendesk-staging.com' CYPRESS_pandoraEnabled=true CYPRESS_pod=998 cypress open",
+    "999": "CYPRESS_baseUrl='https://zendesk-staging.com' CYPRESS_pandoraEnabled=true CYPRESS_pod=999 cypress open",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --browser chrome",
+    "jenkins": "./bin/run-with-timeout.sh"
+  },
+  "devDependencies": {
+    "cypress": "^3.6.1",
+    "cypress-file-upload": "3.3.3",
+    "cypress-wait-until": "1.3.0",
+    "node-fetch": "2.6.0",
+    "unexpected": "11.8.0"
+  }
+}

@@ -1,0 +1,42 @@
+FROM cypress/browsers:node12.6.0-chrome77
+
+ENV PUSER=cypress-test PGROUP=cypress-test PUID=1001 PGID=1001
+
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 \
+  && chmod +x /usr/local/bin/dumb-init
+
+# Need Python 3 for setuser script
+RUN apt-get update
+RUN apt-get install -y python3
+
+# The cypress and the cypress-test user will both be in the cypress group
+RUN mv /home/node /app \
+  && groupmod -n "cypress" node \
+  && usermod -l "cypress" -d /app node \
+  && echo 'umask 002' >> /app/.profile
+RUN groupadd -g "$PGID" "$PGROUP" \
+  && useradd -u "$PUID" -g "$PGID" -G cypress -d /app "$PUSER"
+
+COPY docker-init.sh /docker-init.sh
+COPY setuser /usr/local/bin/setuser
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "/docker-init.sh"]
+
+WORKDIR /app
+
+COPY package.json ./
+COPY cypress.json ./cypress.json
+COPY cypress ./cypress
+COPY bin ./bin
+COPY scripts ./scripts
+RUN chown -R cypress:cypress /app && chmod -R g+w /app
+
+# avoid many lines of progress bars during install
+# https://github.com/cypress-io/cypress/issues/1243
+ENV CI=1
+
+# Install as the cypress user
+RUN su - cypress -c "npm install --no-package-lock --silent"
+RUN su - cypress -c "$(npm bin)/cypress verify"
+
+# Need to chown again because .config will be g-rw, so we should fix that
+RUN chmod -R g+rw,a+X /app/.config
