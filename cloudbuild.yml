@@ -15,6 +15,7 @@ steps:
       - '--label=BRANCH_NAME=$BRANCH_NAME'
       - '--label=TAG_NAME=$TAG_NAME'
       - '--label=REVISION=$COMMIT_SHA'
+      - '--file=./Dockerfile.cypress'
       - '.'
 
   - id: 'tag image'
