@@ -17,6 +17,7 @@ describe("Guide event", () => {
                     .get('#query').type(article.title)
                     .get('zd-autocomplete-multibrand').click());
     });
+    
     it("ArticleInstantSearchResultClicked event present in the sunshine", function () {
         cy
             .getUserEvents(this.user, now)
