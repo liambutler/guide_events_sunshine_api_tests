@@ -1,0 +1,31 @@
+steps:
+  - id: 'pull-tagger'
+    name: 'gcr.io/cloud-builders/docker'
+    waitFor: ['-']
+    args: ['pull', 'gcr.io/$PROJECT_ID/cloud-builders/tagger:latest']
+
+  - id: 'build-image'
+    name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--tag=gcr.io/$PROJECT_ID/github.com/zendesk/guide_events_sunshine_api_tests:build'
+      - '--label=GCB_PROJECT_ID=$PROJECT_ID'
+      - '--label=GCB_BUILD_ID=$BUILD_ID'
+      - '--label=REPO_NAME=$REPO_NAME'
+      - '--label=BRANCH_NAME=$BRANCH_NAME'
+      - '--label=TAG_NAME=$TAG_NAME'
+      - '--label=REVISION=$COMMIT_SHA'
+      - '.'
+
+  - id: 'tag image'
+    name: 'gcr.io/$PROJECT_ID/cloud-builders/tagger'
+    waitFor: ['build-image']
+    env:
+      - SOURCE_IMAGE=gcr.io/$PROJECT_ID/github.com/zendesk/guide_events_sunshine_api_tests:build
+      - IMAGE_NAME=gcr.io/$PROJECT_ID/github.com/zendesk/guide_events_sunshine_api_tests
+      - BRANCH_NAME=$BRANCH_NAME
+      - TAG_NAME=$TAG_NAME
+      - TAG_NON_MASTER_BRANCH=1
+
+images:
+  - 'gcr.io/$PROJECT_ID/github.com/zendesk/guide_events_sunshine_api_tests'
