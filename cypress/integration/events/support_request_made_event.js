@@ -15,7 +15,6 @@ describe("Guide event", () => {
             .get('#request_description').type('Request Test Description')
             .get('input[name="commit"]').click();
     });
-    
     it("SupportRequestMade event present in the sunshine", function () {
         cy
             .wait(10000)
