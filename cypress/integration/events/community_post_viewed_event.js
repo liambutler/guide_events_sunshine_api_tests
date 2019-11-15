@@ -1,5 +1,5 @@
 let now = new Date().toISOString();
-describe("Guide event", () => {
+describe("Community events", () => {
     before(() => {
         cy.getAccount();
     });
@@ -11,7 +11,7 @@ describe("Guide event", () => {
                 cy.signIn(user))
             .openPost()
     });
-    it("ArticleSearchResultClicked event present in the sunshine", function () {
+    it("CommunityPostViewed event present in the sunshine", function () {
         cy
             .eventPreset(this.user, now,'community_post_viewed')
             .then(responseData =>
