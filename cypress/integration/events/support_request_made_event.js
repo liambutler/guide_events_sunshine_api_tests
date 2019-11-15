@@ -15,11 +15,9 @@ describe("Guide event", () => {
             .get('#request_description').type('Request Test Description')
             .get('input[name="commit"]').click();
     });
-    
     it("SupportRequestMade event present in the sunshine", function () {
         cy
-            .wait(10000)
-            .getUserEvents(this.user, now,'support_request_made')
+            .eventPreset(this.user, now,'support_request_made')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

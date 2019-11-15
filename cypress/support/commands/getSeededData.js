@@ -90,17 +90,19 @@ Cypress.Commands.add("getUser", userRole =>
         .then(res => res.body.users.find(user => user.role === userRole))
 );
 
-Cypress.Commands.add("getUserEvents", (user, time, event2) => {
+Cypress.Commands.add("eventPreset", (user, time, event) => {
+    let url = `/api/sunshine/events?identifier=support:user_id:${JSON.stringify(user.id)}&start_time=${time}`;
+    let timeout = 30000;
          return cy
             .waitUntil(() =>
                     cy.requestApi({
                         method: "GET",
-                        url: `/api/sunshine/events?identifier=support:user_id:${JSON.stringify(user.id)}&start_time=${time}`
+                        url: url
                     })
                         .then(response => {
                             if (response.body.data != null) {
                                 for (let i = 0; i < response.body.data.length; i++) {
-                                    if (response.body.data[i].type === event2) {
+                                    if (response.body.data[i].type === event) {
                                         return true
                                     }
                                 }
@@ -110,6 +112,6 @@ Cypress.Commands.add("getUserEvents", (user, time, event2) => {
                             }
                         }
                             )
-                , {interval: 3000, timeout: 30000})
+                , {errorMsg: `Could not find the event in ${timeout/1000} seconds`, interval: 500, timeout: timeout})
     }
 );

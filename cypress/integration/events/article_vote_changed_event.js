@@ -17,8 +17,7 @@ describe("Guide event", () => {
             .get('.article-vote-up').click()
             .wait(1000)
             .get('.article-vote-down').click()
-            .wait(20000)
-            .getUserEvents(this.user, now,'article_vote_changed')
+            .eventPreset(this.user, now,'article_vote_changed')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

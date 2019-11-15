@@ -16,8 +16,7 @@ describe("Guide event", () => {
         cy
             .get('.article-vote-up').click()
             .get('.article-vote-up').click()
-            .wait(10000)
-            .getUserEvents(this.user, now,'article_vote_removed')
+            .eventPreset(this.user, now,'article_vote_removed')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

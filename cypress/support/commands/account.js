@@ -4,13 +4,13 @@ Cypress.Commands.add("getAccount", function(providedAccountDetails = {}) {
   const accountDetails = {
     pod: Cypress.env("pod") || "998",
     guide_enabled: "true",
-    guide_plan: "enterprise",
+    //guide_plan: "enterprise",
     support_enabled: "true",
     support_plan: "enterprise",
     talk_enabled: "false",
     chat_enabled: "false",
     multiproduct: "false",
-    owner_name: "zendesk",
+    owner_name: Cypress.env("ownerName") || "zendesk",
     // Merge in provided account details with all values converted to strings,
     // since Pandora does not handle plain boolean values well.
     ...Object.entries(providedAccountDetails).reduce(
