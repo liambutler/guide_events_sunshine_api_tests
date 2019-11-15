@@ -15,7 +15,7 @@ describe("Guide event", () => {
         let now = new Date().toISOString();
         cy
             .get('.article-vote-up').click()
-            .getUserEvents(this.user, now,'article_vote_added')
+            .eventPreset(this.user, now,'article_vote_added')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

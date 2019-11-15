@@ -18,7 +18,7 @@ describe("Guide event", () => {
     it("ArticleSearchResultClicked event present in the sunshine", function () {
         cy
             .get('.search-result-title').click()
-            .getUserEvents(this.user, now,'article_search_result_clicked')
+            .eventPreset(this.user, now,'article_search_result_clicked')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

@@ -17,8 +17,7 @@ describe("Guide event", () => {
     });
     it("SupportRequestMade event present in the sunshine", function () {
         cy
-            .wait(10000)
-            .getUserEvents(this.user, now,'support_request_made')
+            .eventPreset(this.user, now,'support_request_made')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

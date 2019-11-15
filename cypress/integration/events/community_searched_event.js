@@ -18,8 +18,7 @@ describe("Guide event", () => {
     });
     it("CommunitySearched event present in the sunshine", function () {
         cy
-            .wait(16000)
-            .getUserEvents(this.user, now,'community_searched')
+            .eventPreset(this.user, now,'community_searched')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

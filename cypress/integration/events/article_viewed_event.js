@@ -17,7 +17,7 @@ describe("Guide event", () => {
     });
     it("ArticleViewed event present in the sunshine", function () {
         cy
-            .getUserEvents(this.user, now,'article_viewed')
+            .eventPreset(this.user, now,'article_viewed')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
