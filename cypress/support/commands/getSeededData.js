@@ -112,6 +112,6 @@ Cypress.Commands.add("eventPreset", (user, time, event) => {
                             }
                         }
                             )
-                , {errorMsg: `Could not find the event in ${timeout/1000} seconds`, interval: 1000, timeout: timeout})
+                , {errorMsg: `Could not find the event ${event} in ${timeout/1000} seconds.`, interval: 1000, timeout: timeout})
     }
 );

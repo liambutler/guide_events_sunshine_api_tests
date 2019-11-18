@@ -14,7 +14,6 @@ describe("Guide Search events", () => {
         cy
             .visit('hc/en-us/')
             .getArticle()
-            .as("article")
             .then(article =>
                 cy
                     .get('#query').type(article.title)
@@ -28,7 +27,6 @@ describe("Guide Search events", () => {
     it("ArticleSearchResultClicked event present in the sunshine", function () {
         cy
             .getArticle()
-            .as("article")
             .then(article =>
                 cy
                     .searchOnSearchResultsPage(article.title))
@@ -38,23 +36,21 @@ describe("Guide Search events", () => {
                 expect(responseData).to.be.true)
     });
 
-    it("CommunitySearched event present in the sunshine", function () {
+    it("HelpCenterSearched event present in the sunshine", function () {
         cy
             .visit('hc/en-us/community/topics/')
             .getPost()
-            .as("post")
             .then(post =>
                 cy
                     .get('#query').type(`${post.title}{enter}`))
-            .eventPreset(this.user, now,'community_searched')
+            .eventPreset(this.user, now,'help_center_searched')
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
 
-    it("ArticleSearchResultClicked event present in the sunshine", function () {
+    it("CommunitySearchResultClicked event present in the sunshine", function () {
         cy
             .getPost()
-            .as("post")
             .then(post =>
                 cy
                     .searchOnSearchResultsPage(post.title))
