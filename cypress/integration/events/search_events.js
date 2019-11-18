@@ -1,3 +1,5 @@
+import { events } from "../../fixtures/events";
+
 let now = new Date().toISOString();
 describe("Guide Search events", () => {
     before(() => {
@@ -18,7 +20,7 @@ describe("Guide Search events", () => {
                 cy
                     .get('#query').type(article.title)
                     .get('zd-autocomplete-multibrand').click())
-            .eventPreset(this.user, now,'article_instant_search_result_clicked')
+            .eventPreset(this.user, now, events.articleInstantSearchResultClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
 
@@ -31,7 +33,7 @@ describe("Guide Search events", () => {
                 cy
                     .searchOnSearchResultsPage(article.title))
             .get('.search-result-title').click()
-            .eventPreset(this.user, now,'article_search_result_clicked')
+            .eventPreset(this.user, now, events.articleSearchResultClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
@@ -43,7 +45,7 @@ describe("Guide Search events", () => {
             .then(post =>
                 cy
                     .get('#query').type(`${post.title}{enter}`))
-            .eventPreset(this.user, now,'help_center_searched')
+            .eventPreset(this.user, now, events.helpCenterSearched)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
@@ -55,7 +57,7 @@ describe("Guide Search events", () => {
                 cy
                     .searchOnSearchResultsPage(post.title))
             .get('.search-result-title').first().click()
-            .eventPreset(this.user, now,'community_search_result_clicked')
+            .eventPreset(this.user, now, events.communitySearchResultClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

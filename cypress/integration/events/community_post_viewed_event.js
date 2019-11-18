@@ -1,3 +1,5 @@
+import { events } from "../../fixtures/events";
+
 let now = new Date().toISOString();
 describe("Community events", () => {
     before(() => {
@@ -13,7 +15,7 @@ describe("Community events", () => {
     });
     it("CommunityPostViewed event present in the sunshine", function () {
         cy
-            .eventPreset(this.user, now,'community_post_viewed')
+            .eventPreset(this.user, now, events.communityPostViewed)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

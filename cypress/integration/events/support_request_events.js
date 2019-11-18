@@ -1,4 +1,6 @@
-describe("Guide event", () => {
+import { events } from "../../fixtures/events";
+
+describe("Support request events", () => {
     before(() => {
         cy.getAccount();
     });
@@ -22,7 +24,7 @@ describe("Guide event", () => {
                     .as('url')
         })
 
-            .eventPreset(this.user, now,'support_request_made')
+            .eventPreset(this.user, now, events.supportRequestMade)
             .then(responseData =>
                 expect(responseData).to.be.true)
             .eventPreset(this.user, now,'support_request_viewed')
@@ -34,7 +36,25 @@ describe("Guide event", () => {
         let now = new Date().toISOString();
         cy
             .visit(this.url)
-            .eventPreset(this.user, now,'support_request_viewed')
+            .eventPreset(this.user, now, events.supportRequestViewed)
+            .then(responseData =>
+                expect(responseData).to.be.true)
+    });
+
+    it("ArticleSuggest event is present in the sunshine", function () {
+        let now = new Date().toISOString();
+        cy
+            .visit('hc/en-us/requests/new')
+            .getArticle()
+            .then(article =>
+                cy
+                    .get('#request_subject').type(article.title)
+                    .get('.searchbox-suggestions a').click())
+
+            .eventPreset(this.user, now, events.answersSuggested)
+            .then(responseData =>
+                expect(responseData).to.be.true)
+            .eventPreset(this.user, now, events.suggestedArticleClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
