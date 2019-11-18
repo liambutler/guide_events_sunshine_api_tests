@@ -1,3 +1,5 @@
+import { events } from "../../fixtures/events";
+
 let now = new Date().toISOString();
 describe("Article events", () => {
     before(() => {
@@ -15,7 +17,7 @@ describe("Article events", () => {
 
     it("ArticleViewed event present in the sunshine", function () {
         cy
-            .eventPreset(this.user, now,'article_viewed')
+            .eventPreset(this.user, now, events.articleViewed)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
@@ -27,13 +29,13 @@ describe("Article events", () => {
             .get('.article-vote-down').click()
             .wait(1000)
             .get('.article-vote-down').click()
-            .eventPreset(this.user, now,'article_vote_added')
+            .eventPreset(this.user, now, events.articleVoteAdded)
             .then(responseData =>
                 expect(responseData).to.be.true)
-            .eventPreset(this.user, now,'article_vote_changed')
+            .eventPreset(this.user, now, events.articleVoteChanged)
             .then(responseData =>
                 expect(responseData).to.be.true)
-            .eventPreset(this.user, now,'article_vote_removed')
+            .eventPreset(this.user, now, events.articleVoteRemoved)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
@@ -44,7 +46,7 @@ describe("Article events", () => {
     //         .wait(1000)
     //         .get('.article-vote-down').click()
     //         .get('.article-vote-down').click()
-    //         .eventPreset(this.user, now,'article_vote_changed')
+    //         .eventPreset(this.user, now,events.articleVoteChanged)
     //         .then(responseData =>
     //             expect(responseData).to.be.true)
     // });
@@ -53,7 +55,7 @@ describe("Article events", () => {
     //     cy
     //         .get('.article-vote-up').click()
     //         .get('.article-vote-up').click()
-    //         .eventPreset(this.user, now,'article_vote_removed')
+    //         .eventPreset(this.user, now,events.articleVoteRemoved)
     //         .then(responseData =>
     //             expect(responseData).to.be.true)
     // });
