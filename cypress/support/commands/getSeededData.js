@@ -93,7 +93,6 @@ Cypress.Commands.add("getUser", userRole =>
 Cypress.Commands.add("eventPreset", (user, time, event) => {
     let url = `/api/sunshine/events?identifier=support:user_id:${JSON.stringify(user.id)}&start_time=${time}`;
     let timeout = 15000;
-    debugger
          return cy
             .waitUntil(() =>
                     cy.requestApi({
@@ -113,6 +112,6 @@ Cypress.Commands.add("eventPreset", (user, time, event) => {
                             }
                         }
                             )
-                , {errorMsg: `Could not find the event in ${timeout/1000} seconds`, interval: 1000, timeout: timeout})
+                , {errorMsg: `Could not find the event ${event} in ${timeout/1000} seconds.`, interval: 1000, timeout: timeout})
     }
 );
