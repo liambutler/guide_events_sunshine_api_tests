@@ -15,7 +15,6 @@ describe("Article events", () => {
 
     it("ArticleViewed event present in the sunshine", function () {
         cy
-            .searchOnSearchResultsPage(this.article.title)
             .eventPreset(this.user, now,'article_viewed')
             .then(responseData =>
                 expect(responseData).to.be.true)
