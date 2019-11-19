@@ -59,7 +59,7 @@ describe("Guide Search events", () => {
                 cy
                     .searchOnSearchResultsPage(post.title))
             .get('.search-result-title').first().click()
-            .eventPreset(this.user, now, events.communitySearchResultClicked)
+            .eventPreset(this.user, events.communitySearchResultClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
