@@ -39,7 +39,7 @@ To keep the specs running quickly, there are no cleanups in the before/after ste
 To run a specific test, add the `--spec` option and point it to the spec file you wish to run:
 
 ```bash
-$ cypress run --spec cypress/integration/knowledge-verification/crud_verification_rule.js
+$ cypress run --spec cypress/integration/events/article_events.js
 ```
 
 ## Writing tests
@@ -103,7 +103,7 @@ Commands should be chained together:
 ```js
 cy
   .signIn()
-  .visit("/knowledge/articles/new")
+  .visit("/hc/en-us/")
 ```
 
 Non-Cypress commands should be wrapped using .then(), and should return something.
@@ -131,9 +131,3 @@ Likewise, if many tests will call on the same API, you can have one test to vali
 Avoid clicking through several links in a scenario. While Cypress will have no issue clicking through to multiple parts of an app, it is not a good use of time. Go straight to the part of the app that you want to test. 
 
 If you need to validate a link, consider validating on a url level instead. Much faster than clicking and waiting for a page to load.
-
-#### Encourage the use of `data-test-id`
-
-Because data-test-ids are only used for test purposes, they are less likely to change than other aspects of a DOM element. Page objects can be used in Cypress, but are discouraged. 
-
-Because of this, an app with a good set of data-test-ids will lead to a much more reliable (and readable) set of tests.

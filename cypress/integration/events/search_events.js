@@ -1,9 +1,11 @@
 import { events } from "../../fixtures/events";
 
-let now = new Date().toISOString();
 describe("Guide Search events", () => {
     before(() => {
         cy.getAccount();
+    });
+    after(()=>{
+        cy.deleteProfile('agent');
     });
     beforeEach(() => {
         cy
@@ -20,7 +22,7 @@ describe("Guide Search events", () => {
                 cy
                     .get('#query').type(article.title)
                     .get('zd-autocomplete-multibrand').click())
-            .eventPreset(this.user, now, events.articleInstantSearchResultClicked)
+            .eventPreset(this.user, events.articleInstantSearchResultClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
 
@@ -33,7 +35,7 @@ describe("Guide Search events", () => {
                 cy
                     .searchOnSearchResultsPage(article.title))
             .get('.search-result-title').click()
-            .eventPreset(this.user, now, events.articleSearchResultClicked)
+            .eventPreset(this.user, events.articleSearchResultClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
@@ -45,7 +47,7 @@ describe("Guide Search events", () => {
             .then(post =>
                 cy
                     .get('#query').type(`${post.title}{enter}`))
-            .eventPreset(this.user, now, events.helpCenterSearched)
+            .eventPreset(this.user, events.helpCenterSearched)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
