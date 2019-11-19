@@ -4,7 +4,9 @@
 Cypress.Commands.add("signIn", (user) => {
   const authSession = Cypress.env("authSession");
   //const userEmail = Cypress.config("userEmail");
-  const userEmail = user.email;
+  var userEmail;
+  (typeof user === 'undefined') ? userEmail = Cypress.config("userEmail") : userEmail = user.email;
+  //const userEmail = user.email || Cypress.config("userEmail");
   const userPassword = Cypress.config("userPassword");
   const baseUrl = Cypress.config("baseUrl");
 

@@ -1,9 +1,11 @@
 import { events } from "../../fixtures/events";
 
-let now = new Date().toISOString();
 describe("Community events", () => {
     before(() => {
         cy.getAccount();
+    });
+    after(()=>{
+        cy.deleteProfile('agent');
     });
     beforeEach(() => {
         cy
@@ -15,7 +17,7 @@ describe("Community events", () => {
     });
     it("CommunityPostViewed event present in the sunshine", function () {
         cy
-            .eventPreset(this.user, now, events.communityPostViewed)
+            .eventPreset(this.user, events.communityPostViewed)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });

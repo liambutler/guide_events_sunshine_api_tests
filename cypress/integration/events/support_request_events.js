@@ -4,6 +4,12 @@ describe("Support request events", () => {
     before(() => {
         cy.getAccount();
     });
+    after(()=>{
+        cy
+            .visit('access/logout')
+            .signIn()
+            .deleteProfile('end-user');
+    });
     beforeEach(() => {
         cy
             .getUser('end-user')
@@ -13,7 +19,6 @@ describe("Support request events", () => {
                     .signIn(user))
     });
     it("SupportRequestMade and SupportRequestViewed events are present in the sunshine after creation of a ticket", function () {
-        let now = new Date().toISOString();
         cy
             .visit('hc/en-us/requests/new')
             .get('#request_subject').type('Request Test Subject')
@@ -24,25 +29,23 @@ describe("Support request events", () => {
                     .as('url')
         })
 
-            .eventPreset(this.user, now, events.supportRequestMade)
+            .eventPreset(this.user, events.supportRequestMade)
             .then(responseData =>
                 expect(responseData).to.be.true)
-            .eventPreset(this.user, now,'support_request_viewed')
+            .eventPreset(this.user, events.supportRequestViewed)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
 
     it("SupportRequestViewed event is present in the sunshine after visiting ticket page", function () {
-        let now = new Date().toISOString();
         cy
             .visit(this.url)
-            .eventPreset(this.user, now, events.supportRequestViewed)
+            .eventPreset(this.user, events.supportRequestViewed)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
 
     it("ArticleSuggest event is present in the sunshine", function () {
-        let now = new Date().toISOString();
         cy
             .visit('hc/en-us/requests/new')
             .getArticle()
@@ -51,10 +54,10 @@ describe("Support request events", () => {
                     .get('#request_subject').type(article.title)
                     .get('.searchbox-suggestions a').click())
 
-            .eventPreset(this.user, now, events.answersSuggested)
+            .eventPreset(this.user, events.answersSuggested)
             .then(responseData =>
                 expect(responseData).to.be.true)
-            .eventPreset(this.user, now, events.suggestedArticleClicked)
+            .eventPreset(this.user, events.suggestedArticleClicked)
             .then(responseData =>
                 expect(responseData).to.be.true)
     });
