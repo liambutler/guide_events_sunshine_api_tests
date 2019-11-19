@@ -39,7 +39,6 @@ Cypress.Commands.add("getAccount", function(providedAccountDetails = {}) {
         },
       })
       .then(({ body: { resource_attributes: attr } }) => {
-        debugger
         Cypress.config({
           authString: generateAuthString(attr.email, attr.password),
           baseUrl: attr.url,
