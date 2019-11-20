@@ -45,7 +45,7 @@ describe("Support request events", () => {
                 expect(responseData).to.be.true)
     });
 
-    it("ArticleSuggest event is present in the sunshine", function () {
+    it("ArticleSuggest and SuggestedArticleClicked events are present in the sunshine", function () {
         cy
             .visit('hc/en-us/requests/new')
             .getArticle()
