@@ -27,19 +27,17 @@ describe("Article events", () => {
 // Failed test. Need to enable when fixed.
 
     it("Article Votes event are present in the sunshine", function () {
-        this.skip();
+        // this.skip();
         cy
             .get('.article-vote-up').click()
-            .wait(500)
-            .get('.article-vote-down').click()
-            .wait(500)
-            .get('.article-vote-down').click()
             .eventPreset(this.user, events.articleVoteAdded)
             .then(responseData =>
                 expect(responseData).to.be.true)
+            .get('.article-vote-down').click()
             .eventPreset(this.user, events.articleVoteChanged)
             .then(responseData =>
                 expect(responseData).to.be.true)
+            .get('.article-vote-down').click()
             .eventPreset(this.user, events.articleVoteRemoved)
             .then(responseData =>
                 expect(responseData).to.be.true)

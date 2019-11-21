@@ -52,14 +52,14 @@ describe("Support request events", () => {
             .then(article =>
                 cy
                     .get('#request_subject').type(article.title)
-                    .get('.searchbox-suggestions a').click())
+                    .eventPreset(this.user, events.answersSuggested)
+                    .then(responseData =>
+                        expect(responseData).to.be.true)
+                    .get('.searchbox-suggestions a').click()
+                    .eventPreset(this.user, events.suggestedArticleClicked)
+                    .then(responseData =>
+                        expect(responseData).to.be.true))
 
-            .eventPreset(this.user, events.answersSuggested)
-            .then(responseData =>
-                expect(responseData).to.be.true)
-            .eventPreset(this.user, events.suggestedArticleClicked)
-            .then(responseData =>
-                expect(responseData).to.be.true)
     });
 
 });
