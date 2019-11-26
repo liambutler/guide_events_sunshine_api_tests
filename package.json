@@ -14,13 +14,31 @@
     "999": "CYPRESS_baseUrl='https://zendesk-staging.com' CYPRESS_pandoraEnabled=true CYPRESS_pod=999 cypress open",
     "cy:open": "cypress open",
     "cy:run": "cypress run --browser chrome",
-    "jenkins": "./bin/run-with-timeout.sh"
+    "jenkins": "./bin/run-with-timeout.sh",
+    "lint": "eslint .",
+    "lint-staged": "lint-staged",
+    "format": "./node_modules/.bin/prettier --write 'cypress/**/*.js'"
   },
   "devDependencies": {
     "cypress": "^3.6.1",
     "cypress-file-upload": "3.3.3",
     "cypress-wait-until": "1.3.0",
+    "eslint": "^4.19.0",
+    "eslint-config-pretty-standard": "0.2.2",
+    "eslint-plugin-cypress": "2.7.0",
+    "eslint-plugin-import": "2.12.0",
+    "lint-staged": "9.4.3",
     "node-fetch": "2.6.0",
+    "pre-commit": "1.2.2",
+    "prettier": "1.19.1",
     "unexpected": "11.8.0"
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": [
+      "yarn format",
+      "yarn lint",
+      "git add"
+    ]
   }
 }

@@ -1,17 +1,19 @@
 // signIn:
 // Signs in a user
 
-Cypress.Commands.add("signIn", (user) => {
-  const authSession = Cypress.env("authSession");
+Cypress.Commands.add('signIn', user => {
+  const authSession = Cypress.env('authSession');
   //const userEmail = Cypress.config("userEmail");
   var userEmail;
-  (typeof user === 'undefined') ? userEmail = Cypress.config("userEmail") : userEmail = user.email;
+  typeof user === 'undefined'
+    ? (userEmail = Cypress.config('userEmail'))
+    : (userEmail = user.email);
   //const userEmail = user.email || Cypress.config("userEmail");
-  const userPassword = Cypress.config("userPassword");
-  const baseUrl = Cypress.config("baseUrl");
+  const userPassword = Cypress.config('userPassword');
+  const baseUrl = Cypress.config('baseUrl');
 
   if (authSession) {
-    return cy.setCookie("_zendesk_shared_session", authSession);
+    return cy.setCookie('_zendesk_shared_session', authSession);
   }
 
   cy.request({ url: `${baseUrl}/auth/v2/login` }).then(response => {
@@ -23,20 +25,20 @@ Cypress.Commands.add("signIn", (user) => {
 
     return cy
       .request({
-        method: "POST",
+        method: 'POST',
         url: `${baseUrl}/access/login`,
         form: true,
         body: {
           return_to: `${baseUrl}/auth/v2/login/signed_in`,
-          "user[email]": userEmail,
-          "user[password]": userPassword,
-          authenticity_token: authToken,
-        },
+          'user[email]': userEmail,
+          'user[password]': userPassword,
+          authenticity_token: authToken
+        }
       })
       .then(response => {
         if (
           response.redirects.some(url =>
-            url.includes("/access/unauthenticated")
+            url.includes('/access/unauthenticated')
           )
         ) {
           throw new Error(

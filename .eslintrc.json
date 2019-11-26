@@ -1,0 +1,28 @@
+{
+  "extends": ["pretty-standard"],
+  "globals": {
+    "afterAll": false,
+    "afterEach": false,
+    "before": false,
+    "after": false,
+    "expect": false,
+    "beforeAll": false,
+    "beforeEach": false,
+    "btoa": false,
+    "context": false,
+    "cy": false,
+    "Cypress": false,
+    "describe": false,
+    "it": false,
+    "jest": false,
+    "__DEV__": false,
+    "__PRODUCTION__": false,
+    "__PROD__": false
+  },
+  "plugins": ["cypress", "import"],
+
+  "rules": {
+    "camelcase": 0,
+    "quotes": [2, "single", { "avoidEscape": true }]
+  }
+}
