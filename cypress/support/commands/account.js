@@ -20,10 +20,12 @@ Cypress.Commands.add('getAccount', function(providedAccountDetails = {}) {
   };
 
   if (Cypress.env('pandoraEnabled')) {
+    const pandoraUrl =
+      Cypress.env('pandoraUrl') ||
+      'https://pandora.internaltools-staging-use1.zende.sk';
     cy.request({
       method: 'POST',
-      url:
-        'https://pandora.zende.sk/resource_types/account/resources/lock.json',
+      url: pandoraUrl + '/resource_types/account/resources/lock.json',
       auth: {
         user: 'test',
         pass: 'test'
