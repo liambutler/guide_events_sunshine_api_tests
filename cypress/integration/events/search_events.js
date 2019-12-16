@@ -18,7 +18,7 @@ describe('Guide Search events', () => {
       .then(article =>
         cy
           .get('#query')
-          .type(article.title)
+          .type(article.title.slice(0, -1))
           .get('zd-autocomplete-multibrand:first')
           .click()
       )
