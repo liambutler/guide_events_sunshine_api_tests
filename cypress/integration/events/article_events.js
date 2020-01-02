@@ -20,19 +20,4 @@ describe('Article events', () => {
       responseData => expect(responseData).to.be.true
     );
   });
-
-  it('Article Votes event are present in the sunshine', function() {
-    cy.get('.article-vote-up')
-      .click()
-      .eventPresent(this.user, events.articleVoteAdded)
-      .then(responseData => expect(responseData).to.be.true)
-      .get('.article-vote-down')
-      .click()
-      .eventPresent(this.user, events.articleVoteChanged)
-      .then(responseData => expect(responseData).to.be.true)
-      .get('.article-vote-down')
-      .click()
-      .eventPresent(this.user, events.articleVoteRemoved)
-      .then(responseData => expect(responseData).to.be.true);
-  });
 });

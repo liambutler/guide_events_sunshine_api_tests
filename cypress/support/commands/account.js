@@ -8,6 +8,7 @@ Cypress.Commands.add('getAccount', function(providedAccountDetails = {}) {
     support_enabled: 'true',
     support_plan: 'enterprise',
     talk_enabled: 'false',
+    gather_enabled: 'true',
     chat_enabled: 'false',
     multiproduct: 'false',
     owner_name: Cypress.env('ownerName') || 'guide_events_sunshine',
