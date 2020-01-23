@@ -8,7 +8,8 @@ Cypress.Commands.add('eventPresent', (user, event) => {
       cy
         .requestApi({
           method: 'GET',
-          url: url
+          url: url,
+          failOnStatusCode: false
         })
         .then(response => {
           if (response.body.data != null) {
