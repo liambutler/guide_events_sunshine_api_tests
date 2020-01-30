@@ -48,7 +48,7 @@ describe('Support request events', () => {
           .type(article.title)
           .eventPresent(this.user, events.answersSuggested)
           .then(responseData => expect(responseData).to.be.true)
-          .get('.searchbox-suggestions a')
+          .get('.searchbox-suggestions a:first')
           .click()
           .eventPresent(this.user, events.suggestedArticleClicked)
           .then(responseData => expect(responseData).to.be.true)
