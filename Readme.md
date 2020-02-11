@@ -122,7 +122,7 @@ This is good testing practice in general, but because Cypress is so closely tied
 
 Here are a couple of examples of what can be done with Cypress:
 
-Specs do not need to go through the sign in modal each time. One spec could test the modal, and subsequent scenarios can set a cookie in the setup steps. This saves 5-10 seconds from each spec. [Here is a good example from this repo](https://github.com/zendesk/guide-client/blob/master/integration-test/cypress/support/commands/signIn.js).
+Specs do not need to go through the sign in modal each time. One spec could test the modal, and subsequent scenarios can set a cookie in the setup steps. This saves 5-10 seconds from each spec. [Here is a good example from this repo](https://github.com/zendesk/guide_events_sunshine_api_tests/blob/master/cypress/support/commands/signIn.js).
 
 Likewise, if many tests will call on the same API, you can have one test to validate the integration. If other tests need to make the same call, this can be stubbed using [cy.server()](https://docs.cypress.io/api/commands/server.html) and [cy.route()](https://docs.cypress.io/api/commands/route.html) 
 
